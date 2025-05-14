@@ -59,7 +59,7 @@ namespace linqTest
             var temperatureAbove30sql = (from t in temperatures
                                          where t > 30
                                          select t).ToList();
-            
+
 
 
             for (int i = 0; i < temperatureAbove30.Count; i++)
@@ -98,18 +98,97 @@ namespace linqTest
             {
                 Console.WriteLine($"{citiesWithTemperaturesAbove30[i]}");
             }
+
+
+
+            /////solo i nickname, poi nickname + name, poi solo i maschi
+
+            //var allNicknames = nicknameStudent.Keys.ToList();
+            //// Stampa tutti i nickname
+            //foreach (var nickname in allNicknames)
+            //{
+            //    Console.WriteLine(nickname);
+            //}
+
+
+
+            var allNicknames = nicknameStudent.ToList();
+            Console.WriteLine("----------Soprannomi-----------");
+            foreach (var entry in allNicknames)
+            {
+                Console.WriteLine($"{entry.Key} è il soprannome di {entry.Value.Name}");
+            }
+
+
+
+            Console.WriteLine("----------Soprannomi Maschi-----------");
+            var maleNicknames = nicknameStudent.Where(entry => entry.Value.IsMale).ToList();
+
+            foreach (var entry in maleNicknames)
+            {
+                Console.WriteLine($"{entry.Key} è il soprannome di {entry.Value.Name} (Maschio)");
+            }
+
+
+
+            ////////////3- faccia una media delle temperature delle citta che iniziano con la s
+            Console.WriteLine("----------Temperature Average & MAX -----------");
+            var averageTempSCities = cityTemperature
+                                                    .Where(city => city.Key.StartsWith("S", StringComparison.OrdinalIgnoreCase))
+                                                    .Average(city => city.Value);
+
+            Console.WriteLine($"Temperatura media città con 'S': {averageTempSCities}°C");
+
+
+            ///////////4- nome citta con temperatura piu alta
+
+            // Con OrderByDescending e First
+            var hottestCity = cityTemperature.OrderByDescending(entry => entry.Value).First();
+            Console.WriteLine($"La città con la temperatura più alta è {hottestCity.Key} con {hottestCity.Value}°C");
+
+           // Maxby
+            var hottestCityAlt = cityTemperature.MaxBy(entry => entry.Value);
+            Console.WriteLine($"La città con la temperatura più alta è {hottestCityAlt.Key} con {hottestCityAlt.Value}°C");
+
+            /////////////////////////////prenda aray cities e temperature e fonda i due array in un dizionario (da liste e crei diionario)
+            Console.WriteLine("----------Dictionary cities/temperatures-----------"); 
+            var weatherDict = cities.Zip(temperatures)
+                          .ToDictionary(
+                              pair => pair.First,    
+                              pair => pair.Second   
+                          );
+
+            
+            foreach (var entry in weatherDict)
+            {
+                Console.WriteLine($"{entry.Key}: {entry.Value}°C");
+            }
+
+            Console.WriteLine("----------Dictionary Nicknames/Ages -----------");
+            
+            var NickAgeDictionary = nicknameStudent.ToDictionary(
+                    entry => entry.Key,     
+                    entry => entry.Value.Age 
+            );
+
+            foreach (var entry in NickAgeDictionary)
+            {
+                Console.WriteLine($"Nickname: {entry.Key}, Età: {entry.Value}");
+            }
+
         }
 
-        
-
     }
+
 }
+
+
 
 //////compiti
 ///1-riscrivere tutto cio che è stato fatto in classe ma con aggregate. (facoltativo, corrispondente a reduce).
 ///2- scrivere una query che mi dia tutti inickname degli studenti maschi
 ///3- faccia una media delle temperature delle citta che iniziano con la s
 ///4- nome citta con temperatura piu alta
-///5- prenda aray cities e temperature e fonda i due array in un dizionario (da liste e crei diionario)
-///funzione lnq che prenda dizionario di nickname student che sia nickname/age
+///5- prendi list cities e temperature e crea dizionario uguale a cityTemp (list to dictionary)
+///6-  prendi nick e fai dizionario nick ed age
 ///learn microsoft linq 
