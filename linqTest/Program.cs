@@ -104,3 +104,12 @@ namespace linqTest
 
     }
 }
+
+//////compiti
+///1-riscrivere tutto cio che è stato fatto in classe ma con aggregate. (facoltativo, corrispondente a reduce).
+///2- scrivere una query che mi dia tutti inickname degli studenti maschi
+///3- faccia una media delle temperature delle citta che iniziano con la s
+///4- nome citta con temperatura piu alta
+///5- prenda aray cities e temperature e fonda i due array in un dizionario (da liste e crei diionario)
+///funzione lnq che prenda dizionario di nickname student che sia nickname/age
+///learn microsoft linq 
