@@ -88,7 +88,19 @@ namespace linqTest
             {
                 Console.WriteLine($"{studentsByNamesThenAges[i].Name} {studentsByNamesThenAges[i].Age}");
             }
+
+            var citiesWithTemperaturesAbove30 = cityTemperature
+                .Where(ct => ct.Value > 30)
+                .Select(ct => ct.Key)
+                .ToList();
+
+            for (int i = 0; i < citiesWithTemperaturesAbove30.Count; i++)
+            {
+                Console.WriteLine($"{citiesWithTemperaturesAbove30[i]}");
+            }
         }
+
+        
 
     }
 }
