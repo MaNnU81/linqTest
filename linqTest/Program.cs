@@ -150,7 +150,7 @@ namespace linqTest
             var hottestCityAlt = cityTemperature.MaxBy(entry => entry.Value);
             Console.WriteLine($"La città con la temperatura più alta è {hottestCityAlt.Key} con {hottestCityAlt.Value}°C");
 
-            /////////////////////////////prenda aray cities e temperature e fonda i due array in un dizionario (da liste e crei diionario)
+            /////////////////////////////prenda array cities e temperature e fonda i due array in un dizionario (da liste e crei diionario)
             Console.WriteLine("----------Dictionary cities/temperatures-----------"); 
             var weatherDict = cities.Zip(temperatures)
                           .ToDictionary(
